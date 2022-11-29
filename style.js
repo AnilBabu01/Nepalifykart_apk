@@ -2,7 +2,6 @@ import {StyleSheet} from 'react-native';
 const style = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: 'yellow',
   },
   btn: {
     backgroundColor: 'green',
@@ -32,7 +31,7 @@ const style = StyleSheet.create({
 
   cardimge: {
     height: 200,
-    width: 280,
+    width: 330,
   },
 });
 

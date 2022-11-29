@@ -81,7 +81,7 @@ export default function Flatlist() {
         data={data}
         renderItem={({item}) => {
           return (
-            <TouchableOpacity onPress={() => getdata()}>
+            <TouchableOpacity onPress={() => handleclick(item.id)}>
               <View key={item.id}>
                 <Text style={style.cusview}>{item.name}</Text>
               </View>

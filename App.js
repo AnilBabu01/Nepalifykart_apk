@@ -1,76 +1,51 @@
-// In App.js in a new project
-
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import Home from './src/scressns/Home';
 import Login from './src/scressns/Login';
 import Signup from './src/scressns/Signup';
-import Flstlist from './src/scressns/Flatlist';
-
+import SplashScreen from './src/scressns/SplashScreen';
+import MaterialBottomTab from './src/navigation/MaterialBottomTab';
+import Drawert from './src/navigation/Drawert';
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
-function App() {
+
+const App = () => {
+  const [showSplashScreen, setshowSplashScreen] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setshowSplashScreen(false);
+    }, 4000);
+  }, []);
+
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
-          name="Home"
-          component={Home}
+      <Stack.Navigator>
+        {showSplashScreen ? (
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="SplashScreen"
+            component={SplashScreen}
+          />
+        ) : null}
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Drawert"
+          component={Drawert}
+        />
+        <Stack.Screen
+          name="MaterialBottomTab"
+          component={MaterialBottomTab}
           options={{
-            tabBarIcon: () => {
-              return <Ionicons name="home" size={20} />;
-            },
+            // headerStyle: {backgroundColor: 'green'},
+            // headerTitle: 'hello world',
+            // headerTitleAlign: 'center',
+            headerShown: false,
           }}
         />
-        <Tab.Screen
-          name="Search"
-          component={Login}
-          options={{
-            tabBarIcon: () => {
-              return <Ionicons name="search" size={20} />;
-            },
-          }}
-        />
-        <Tab.Screen
-          name="Settings"
-          component={Signup}
-          options={{
-            tabBarIcon: () => {
-              return <Ionicons name="settings" size={20} />;
-            },
-          }}
-        />
-        <Tab.Screen
-          name="Profile"
-          component={Flstlist}
-          options={{
-            tabBarIcon: () => {
-              return <Ionicons name="person" size={20} />;
-            },
-          }}
-        />
-      </Tab.Navigator>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Signup" component={Signup} />
+      </Stack.Navigator>
     </NavigationContainer>
-
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //     <Stack.Screen
-    //       name="Home"
-    //       component={Home}
-    //       // options={{
-    //       //   headerStyle: {backgroundColor: 'green'},
-    //       //   headerTitle: 'hello world',
-    //       //   headerTitleAlign: 'center',
-    //       // }}
-    //     />
-    //     <Stack.Screen name="Login" component={Login} />
-    //     <Stack.Screen name="Signup" component={Signup} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
   );
-}
+};
 
 export default App;

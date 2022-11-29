@@ -80,7 +80,7 @@ const Home = () => {
       const {data} = await axios.get(
         'https://backend.akash.nepalifykart.com/api/product/getAllProduct',
       );
-      console.log(data.products);
+
       setproducts(data.products);
     } catch (error) {
       console.log(error);
@@ -93,7 +93,7 @@ const Home = () => {
 
   return (
     <View style={style.main}>
-      <StatusBar backgroundColor={'red'} />
+      <StatusBar backgroundColor={'#232f3e'} />
       <View>
         <FlatList
           data={products}
