@@ -1,96 +1,76 @@
-import {View, Text, StatusBar, FlatList, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
-import {style} from './style';
-import axios from 'axios';
-export default function App() {
-  const [data, setdata] = useState([
-    {
-      id: 1,
-      name: 'anil babu',
-    },
-    {
-      id: 2,
-      name: 'anil babu',
-    },
-    {
-      id: 3,
-      name: 'anil babu',
-    },
-    {
-      id: 4,
-      name: 'anil babu',
-    },
-    {
-      id: 5,
-      name: 'anil babu',
-    },
-    {
-      id: 6,
-      name: 'anil babu',
-    },
-    {
-      id: 7,
-      name: 'anil babu',
-    },
-    {
-      id: 8,
-      name: 'anil babu',
-    },
-    {
-      id: 9,
-      name: 'anil babu',
-    },
-    {
-      id: 10,
-      name: 'anil babu',
-    },
-    {
-      id: 11,
-      name: 'anil babu',
-    },
-    {
-      id: 12,
-      name: 'anil babu',
-    },
-  ]);
+// In App.js in a new project
 
-  const handleclick = id => {
-    setdata(predata => {
-      return predata.filter(tempdata => {
-        if (tempdata.id != id) {
-          return tempdata;
-        }
-      });
-    });
-  };
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Home from './src/scressns/Home';
+import Login from './src/scressns/Login';
+import Signup from './src/scressns/Signup';
+import Flstlist from './src/scressns/Flatlist';
 
-  const getdata = async () => {
-    try {
-      const {data} = await axios.get(
-        'https://backend.akash.nepalifykart.com/api/product/getAllProduct',
-      );
-      console.log(JSON(data));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+function App() {
   return (
-    <View style={style.main}>
-      <StatusBar backgroundColor={'red'} />
-      <View>
-        <FlatList
-          data={data}
-          renderItem={({item}) => {
-            return (
-              <TouchableOpacity onPress={() => getdata()}>
-                <View key={item.id}>
-                  <Text style={style.cusview}>{item.name}</Text>
-                </View>
-              </TouchableOpacity>
-            );
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarIcon: () => {
+              return <Ionicons name="home" size={20} />;
+            },
           }}
         />
-      </View>
-    </View>
+        <Tab.Screen
+          name="Search"
+          component={Login}
+          options={{
+            tabBarIcon: () => {
+              return <Ionicons name="search" size={20} />;
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={Signup}
+          options={{
+            tabBarIcon: () => {
+              return <Ionicons name="settings" size={20} />;
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Flstlist}
+          options={{
+            tabBarIcon: () => {
+              return <Ionicons name="person" size={20} />;
+            },
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+
+    // <NavigationContainer>
+    //   <Stack.Navigator>
+    //     <Stack.Screen
+    //       name="Home"
+    //       component={Home}
+    //       // options={{
+    //       //   headerStyle: {backgroundColor: 'green'},
+    //       //   headerTitle: 'hello world',
+    //       //   headerTitleAlign: 'center',
+    //       // }}
+    //     />
+    //     <Stack.Screen name="Login" component={Login} />
+    //     <Stack.Screen name="Signup" component={Signup} />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 }
+
+export default App;

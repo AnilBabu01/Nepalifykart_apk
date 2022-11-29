@@ -1,32 +1,12 @@
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
-import {style} from '../style';
+import {style} from '../../style';
 
-export default function Login() {
-  const [email, setemail] = useState('dddd');
+const Signup = () => {
+  const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
   return (
     <View style={style.main}>
-      <View>
-        <Text
-          style={{
-            fontSize: 22,
-            color: 'red',
-            marginLeft: 15,
-            marginBottom: 15,
-          }}>
-          {email}
-        </Text>
-        <Text
-          style={{
-            fontSize: 22,
-            color: 'red',
-            marginLeft: 15,
-            marginBottom: 15,
-          }}>
-          {password}
-        </Text>
-      </View>
       <View
         style={{
           flex: 1,
@@ -68,4 +48,6 @@ export default function Login() {
       </View>
     </View>
   );
-}
+};
+
+export default Signup;

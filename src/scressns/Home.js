@@ -1,9 +1,19 @@
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StatusBar,
+  FlatList,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
+import {style} from '../../style';
 import axios from 'axios';
-import {style} from '../style';
-
-export default function Flatlist() {
+import {useNavigation} from '@react-navigation/native';
+const Home = () => {
+  const navigation = useNavigation();
+  const [email, setemail] = useState('');
+  const [products, setproducts] = useState([]);
   const [data, setdata] = useState([
     {
       id: 1,
@@ -64,31 +74,48 @@ export default function Flatlist() {
       });
     });
   };
+
   const getdata = async () => {
     try {
-      const res = await axios.get(
+      const {data} = await axios.get(
         'https://backend.akash.nepalifykart.com/api/product/getAllProduct',
       );
-      console.log(res);
+      console.log(data.products);
+      setproducts(data.products);
     } catch (error) {
       console.log(error);
     }
   };
 
+  useEffect(() => {
+    getdata();
+  }, []);
+
   return (
-    <View>
-      <FlatList
-        data={data}
-        renderItem={({item}) => {
-          return (
-            <TouchableOpacity onPress={() => getdata()}>
-              <View key={item.id}>
-                <Text style={style.cusview}>{item.name}</Text>
+    <View style={style.main}>
+      <StatusBar backgroundColor={'red'} />
+      <View>
+        <FlatList
+          data={products}
+          renderItem={({item}) => {
+            return (
+              <View>
+                <View key={item._id} style={style.cusview}>
+                  <Image
+                    source={{
+                      uri: item.images[0].Url,
+                    }}
+                    style={style.cardimge}
+                  />
+                  <Text style={style.cusview}>{item.name}</Text>
+                </View>
               </View>
-            </TouchableOpacity>
-          );
-        }}
-      />
+            );
+          }}
+        />
+      </View>
     </View>
   );
-}
+};
+
+export default Home;

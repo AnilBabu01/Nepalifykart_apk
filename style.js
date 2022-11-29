@@ -17,7 +17,7 @@ const style = StyleSheet.create({
 
   inputstyle: {
     borderWidth: 2,
-    width: 410,
+    width: 355,
     borderRadius: 50,
     paddingLeft: 15,
   },
@@ -28,6 +28,11 @@ const style = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: 20,
     padding: 20,
+  },
+
+  cardimge: {
+    height: 200,
+    width: 280,
   },
 });
 
