@@ -4,6 +4,10 @@ import {createMaterialBottomTabNavigator} from '@react-navigation/material-botto
 import Home from '../scressns/Home';
 import Signup from '../scressns/Signup';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Flatlist from '../scressns/Flatlist';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Amazon from '../scressns/Amazon';
+import HomeScreen from '../scressns/HomeScreen';
 const Tab = createMaterialBottomTabNavigator();
 
 function MaterialBottomTab() {
@@ -15,39 +19,78 @@ function MaterialBottomTab() {
       shifting={false}>
       <Tab.Screen
         options={{
-          tabBarIcon: () => {
-            return <Ionicons name="home" size={20} color={'white'} />;
+          tabBarIcon: ({focused, tintColor, size}) => {
+            return (
+              <Ionicons
+                name={focused ? 'home-outline' : 'home'}
+                size={20}
+                color={focused ? '#fa9c23' : 'white'}
+              />
+            );
           },
         }}
         name="Home"
-        component={Home}
+        component={HomeScreen}
       />
       <Tab.Screen
         options={{
-          tabBarIcon: () => {
-            return <Ionicons name="search" size={20} color={'white'} />;
+          tabBarIcon: ({focused, tintColor, size}) => {
+            return (
+              <Icon
+                name="widgets"
+                size={28}
+                color={focused ? '#fa9c23' : 'white'}
+              />
+            );
           },
         }}
-        name="Login"
-        component={Login}
+        name="Categories"
+        component={Flatlist}
       />
       <Tab.Screen
         options={{
-          tabBarIcon: () => {
-            return <Ionicons name="settings" size={20} color={'white'} />;
+          tabBarIcon: ({focused, tintColor, size}) => {
+            return (
+              <Icon
+                name="work"
+                size={28}
+                color={focused ? '#fa9c23' : 'white'}
+              />
+            );
           },
         }}
-        name="Sigdnup"
-        component={Signup}
+        name="My Orders"
+        component={Flatlist}
       />
       <Tab.Screen
         options={{
-          tabBarIcon: () => {
-            return <Ionicons name="person" size={20} color={'white'} />;
+          tabBarIcon: ({focused, tintColor, size}) => {
+            return (
+              <Ionicons
+                name={focused ? 'archive-outline' : 'archive'}
+                size={20}
+                color={focused ? '#fa9c23' : 'white'}
+              />
+            );
           },
         }}
-        name="Signup"
-        component={Signup}
+        name="Shipping"
+        component={Amazon}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({focused, tintColor, size}) => {
+            return (
+              <Ionicons
+                name={focused ? 'shirt-outline' : 'shirt'}
+                size={20}
+                color={focused ? '#fa9c23' : 'white'}
+              />
+            );
+          },
+        }}
+        name="Rental"
+        component={Flatlist}
       />
     </Tab.Navigator>
   );
