@@ -6,6 +6,11 @@ import Signup from './src/scressns/Signup';
 import SplashScreen from './src/scressns/SplashScreen';
 import MaterialBottomTab from './src/navigation/MaterialBottomTab';
 import Drawert from './src/navigation/Drawert';
+import Loginscreen from './src/scressns/Loginscreen';
+import SignupSreen from './src/scressns/SignupSreen';
+import ResetPasswordScreen from './src/scressns/ResetPasswordScreen';
+import ForgetPasswordScreen from './src/scressns/ForgetPasswordScreen';
+import ProductDetailsScreen from './src/scressns/ProductDetailsScreen';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -41,8 +46,41 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen
+          name="Login"
+          component={Loginscreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Signup"
+          component={SignupSreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Resetpassword"
+          component={ResetPasswordScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Forgetpassword"
+          component={ForgetPasswordScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="ProductDetailsScreen"
+          component={ProductDetailsScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

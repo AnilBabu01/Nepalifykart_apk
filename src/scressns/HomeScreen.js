@@ -9,13 +9,16 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import axios from 'axios';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import COLORS from '../consts/colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const width = Dimensions.get('window').width / 2 - 30;
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = () => {
+  const navigation = useNavigation();
   const [catergoryIndex, setCategoryIndex] = React.useState(0);
 
   const categories = [
@@ -86,7 +89,7 @@ const HomeScreen = ({navigation}) => {
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={() => navigation.navigate('Details', plant)}>
+        onPress={() => navigation.navigate('ProductDetailsScreen', plant)}>
         <View style={style.card}>
           <View style={{alignItems: 'flex-end'}}>
             <View
@@ -175,7 +178,10 @@ const HomeScreen = ({navigation}) => {
             Nepalifykart
           </Text>
         </View>
-        <Text>Login</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text style={{color: '#fa9c23', fontWeight: 'bold'}}>Login</Text>
+        </TouchableOpacity>
+
         <Icon name="shopping-cart" size={28} />
       </View>
       <View style={{marginTop: 20, flexDirection: 'row'}}>
@@ -190,22 +196,20 @@ const HomeScreen = ({navigation}) => {
         </View>
       </View>
 
-      <ScrollView>
-        <CategoryList />
-        <FlatList
-          columnWrapperStyle={{justifyContent: 'space-between'}}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            marginTop: 10,
-            paddingBottom: 50,
-          }}
-          numColumns={2}
-          data={products}
-          renderItem={({item}) => {
-            return <Card plant={item} />;
-          }}
-        />
-      </ScrollView>
+      <CategoryList />
+      <FlatList
+        columnWrapperStyle={{justifyContent: 'space-between'}}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          marginTop: 10,
+          paddingBottom: 50,
+        }}
+        numColumns={2}
+        data={products}
+        renderItem={({item}) => {
+          return <Card plant={item} />;
+        }}
+      />
     </SafeAreaView>
   );
 };
